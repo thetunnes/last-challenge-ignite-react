@@ -21,10 +21,12 @@ export default function RootLayout({ children, session }: LayoutProps) {
   return (
     <html lang="en">
       <body
-        className={`${nunito.className} min-h-screen bg-gray-800 p-5 text-gray-200`}
+        className={`${nunito.className} box-border min-h-screen max-w-[calc(100vw-1.25rem)] bg-gray-800 p-5 text-gray-200`}
       >
         <SessionProvider session={session}>
-          <main className="min-h-[calc(100vh-2.5rem)] flex">{children}</main>
+          <div className="flex min-h-[calc(100vh-2.5rem)] w-full">
+            {children}
+          </div>
         </SessionProvider>
       </body>
     </html>

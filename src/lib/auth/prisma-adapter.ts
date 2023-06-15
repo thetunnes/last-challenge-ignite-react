@@ -4,8 +4,6 @@ import type { PrismaClient } from '@prisma/client'
 export default function PrismaAdapter(prisma: PrismaClient): Adapter {
   return {
     async createUser(user) {
-      console.log(user)
-
       let prismaUser = await prisma.user.findUnique({
         where: {
           email: user.email,

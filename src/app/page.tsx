@@ -1,14 +1,23 @@
-import Image from 'next/image'
-import Logo from '../images/Logo.svg'
-import { MenuSidebar } from '@/components/MenuSidebar'
+import { RecentedRatedBook } from '@/components/RecentRated'
+import { Sidebar } from '@/components/MenuSidebar'
+import { TitlePage } from '@/components/TitlePage'
 
-export default function Home() {
+export default function Home({
+  searchParams,
+}: {
+  searchParams: { page: string }
+}) {
   return (
-    <section className="flex-1 flex justify-between">
-      <aside className="relative flex flex-col items-center justify-start bg-[url('../images/Background.png')] rounded-[12px] p-6">
-        <Image src={Logo} alt="" className="mb-16" />
-        <MenuSidebar />
-      </aside>
+    <section className="flex flex-1 justify-between">
+      <Sidebar />
+
+      <main className="flex w-full flex-col gap-10 px-24 py-6">
+        <TitlePage />
+
+        <section className="flex gap-16">
+          <RecentedRatedBook page={searchParams.page} />
+        </section>
+      </main>
     </section>
   )
 }

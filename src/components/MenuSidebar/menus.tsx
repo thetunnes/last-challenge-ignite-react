@@ -34,7 +34,7 @@ const menus = [
 
 export function Menu({ session }: MenuProps) {
   return (
-    <ul className="flex-1 flex flex-col items-start gap-4">
+    <ul className="flex flex-1 flex-col items-start gap-4">
       {menus.map((menu) => {
         if (!session && menu.private) {
           return null

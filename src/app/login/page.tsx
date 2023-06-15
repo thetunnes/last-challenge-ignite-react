@@ -1,19 +1,19 @@
 import Image from 'next/image'
-import HeroLogin from '../../images/hero-login.png'
+import HeroLogin from '../../../public/images/hero-login.png'
 import { BoxLogin } from './BoxLogin'
 
 export default function Login() {
   return (
-    <section className="w-full h-[calc(100vh-40px)] flex justify-between">
+    <section className="flex h-[calc(100vh-40px)] w-full justify-between">
       <Image
         src={HeroLogin}
         alt=""
-        className="w-max max-h-full object-contain"
+        className="max-h-full w-max object-contain"
       />
 
-      <div className="flex mx-auto flex-col gap-10 justify-center">
+      <div className="mx-auto flex flex-col justify-center gap-10">
         <header className="flex flex-col gap-0.5">
-          <h2 className="text-gray-100 font-bold text-xl leading-short ">
+          <h2 className="text-xl font-bold leading-short text-gray-100 ">
             Boas vindas!
           </h2>
           <p className="text-md ">Faça seu login ou acesse como visitante.</p>
