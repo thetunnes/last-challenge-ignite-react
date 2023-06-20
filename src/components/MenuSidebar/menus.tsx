@@ -39,7 +39,16 @@ export function Menu({ session }: MenuProps) {
         if (!session && menu.private) {
           return null
         }
-        return <NavLink menu={menu} key={menu.url} />
+        return (
+          <NavLink
+            menu={
+              menu.url === '/perfil'
+                ? { ...menu, url: `/perfil/${session?.user.id}` }
+                : menu
+            }
+            key={menu.url}
+          />
+        )
       })}
     </ul>
   )

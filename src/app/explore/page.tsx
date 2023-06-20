@@ -19,6 +19,8 @@ export interface IRating {
   book_id: string
   rate: number
   description: string
+  created_at: string
+  user_id: string
 }
 
 export interface IBook {
@@ -27,7 +29,10 @@ export interface IBook {
   author: string
   cover_url: string
   summary: string
+  total_pages: string
+  created_at: string
   ratings?: IRating[]
+  categories?: ICategory[]
 }
 
 async function getCategories() {
@@ -45,7 +50,7 @@ export default function ExploreBooks() {
 
   const [books, setBooks] = useState<IBook[]>([])
 
-  const [isLoadingBooks, setIsLoadingBooks] = useState(false)
+  const [isLoadingBooks, setIsLoadingBooks] = useState(true)
 
   const [openDrawerBook, setOpenDrawerBook] = useState('')
 
@@ -111,23 +116,21 @@ export default function ExploreBooks() {
                 <span className="text-xs">Carregando livros...</span>
               </Loading>
             </div>
-          ) : (
+          ) : books.length ? (
             <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-2 xl:grid-cols-3">
-              {books.length ? (
-                books.map((book) => (
-                  <Book
-                    book={book}
-                    key={book.id}
-                    onClick={() => setOpenDrawerBook(book.id)}
-                  >
-                    <AverageRating ratings={book.ratings} />
-                  </Book>
-                ))
-              ) : (
-                <div className="flex w-full justify-center">
-                  <p>Não encontramos livros para os filtros inseridos 😔</p>
-                </div>
-              )}
+              {books.map((book) => (
+                <Book
+                  book={book}
+                  key={book.id}
+                  onClick={() => setOpenDrawerBook(book.id)}
+                >
+                  <AverageRating ratings={book.ratings} />
+                </Book>
+              ))}
+            </div>
+          ) : (
+            <div className="flex w-full justify-center">
+              <p>Não encontramos livros para os filtros inseridos 😔</p>
             </div>
           )}
         </section>

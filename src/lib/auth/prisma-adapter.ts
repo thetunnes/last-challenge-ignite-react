@@ -6,7 +6,7 @@ export default function PrismaAdapter(prisma: PrismaClient): Adapter {
     async createUser(user) {
       let prismaUser = await prisma.user.findUnique({
         where: {
-          email: user.email,
+          name: user.name,
         },
       })
 
@@ -14,7 +14,6 @@ export default function PrismaAdapter(prisma: PrismaClient): Adapter {
         prismaUser = await prisma.user.create({
           data: {
             name: user.name,
-            email: user.email,
             avatar_url: user.image,
           },
         })
@@ -23,7 +22,7 @@ export default function PrismaAdapter(prisma: PrismaClient): Adapter {
       return {
         id: prismaUser.id,
         name: prismaUser.name,
-        email: prismaUser.email!,
+        email: '',
         avatar_url: prismaUser.avatar_url!,
         emailVerified: null,
       }
@@ -45,7 +44,7 @@ export default function PrismaAdapter(prisma: PrismaClient): Adapter {
       return {
         id: user.id,
         name: user.name,
-        email: user.email!,
+        email: '',
         avatar_url: user.avatar_url!,
         emailVerified: null,
       }
@@ -73,7 +72,7 @@ export default function PrismaAdapter(prisma: PrismaClient): Adapter {
       return {
         id: user.id,
         name: user.name,
-        email: user.email!,
+        email: '',
         avatar_url: user.avatar_url!,
         emailVerified: null,
       }
@@ -93,7 +92,7 @@ export default function PrismaAdapter(prisma: PrismaClient): Adapter {
       return {
         id: userUpdated.id,
         name: userUpdated.name,
-        email: userUpdated.email!,
+        email: '',
         avatar_url: userUpdated.avatar_url!,
         emailVerified: null,
       }
@@ -158,7 +157,7 @@ export default function PrismaAdapter(prisma: PrismaClient): Adapter {
         user: {
           id: user.id,
           name: user.name,
-          email: user.email!,
+          email: '',
           emailVerified: null,
           avatar_url: user.avatar_url!,
         },

@@ -2,7 +2,6 @@
 CREATE TABLE "users" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "name" TEXT NOT NULL,
-    "email" TEXT,
     "avatar_url" TEXT,
     "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -73,10 +72,13 @@ CREATE TABLE "sessions" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
+CREATE UNIQUE INDEX "users_name_key" ON "users"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "categories_name_key" ON "categories"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "accounts_provider_provider_account_id_key" ON "accounts"("provider", "provider_account_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "sessions_session_token_key" ON "sessions"("session_token");

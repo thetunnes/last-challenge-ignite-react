@@ -13,7 +13,7 @@ export function TitlePage() {
       </h1>
     )
   }
-  if (pathname === '/perfil') {
+  if (pathname.includes('/perfil')) {
     return (
       <h1 className="flex items-center gap-3 text-2xl font-bold">
         <User size={32} className="text-green-100" /> Perfil

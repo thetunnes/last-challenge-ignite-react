@@ -1,6 +1,6 @@
 'use client'
 import { useMemo } from 'react'
-import { Star, StarHalf } from 'lucide-react'
+import { Star, StarHalf } from '@phosphor-icons/react'
 import { IRating } from '@/app/explore/page'
 
 interface IAverageRatingProps {
@@ -38,15 +38,15 @@ export function AverageRating({ ratings }: IAverageRatingProps) {
     <div className="flex items-center justify-start gap-1">
       {Array.from({ length: 5 }, (_, i) => i + 1).map((num) => {
         if (averageValue + 0.5 > num) {
-          return <Star key={num} color="#8381D9" size={16} />
+          return <Star key={num} color="#8381D9" size={16} weight="fill" />
         }
 
         if (averageValue + 0.5 === num) {
-          return <StarHalf key={num} color="#8381D9" size={16} />
+          return <StarHalf key={num} color="#8381D9" size={16} weight="fill" />
         }
 
         return (
-          <Star key={num} color="#F8F9FC" size={16} className="opacity-50" />
+          <Star key={num} color="#8381D9" size={16} className="opacity-50" />
         )
       })}
     </div>

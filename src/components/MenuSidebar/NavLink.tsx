@@ -19,7 +19,7 @@ export function NavLink({ menu }: NavLinkProps) {
       <Link
         href={menu.url}
         className={`
-        flex items-center gap-3 capitalize transition-all before:rounded-full hover:text-gray-100 before:absolute before:-left-4 before:bottom-0 before:top-0 before:w-1 hover:before:bg-gradient-vertical
+        flex items-center gap-3 capitalize transition-all before:absolute before:-left-4 before:bottom-0 before:top-0 before:w-1 before:rounded-full hover:text-gray-100 hover:before:bg-gradient-vertical
         ${
           pathname === menu.url
             ? 'text-gray-100 before:bg-gradient-vertical'

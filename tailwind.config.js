@@ -55,6 +55,10 @@ module.exports = {
         300: '#0A313C',
       },
 
+      red: {
+        500: '#ef4444',
+      },
+
       purple: {
         50: '#9694F5',
         100: '#8381D9',
@@ -92,5 +96,5 @@ module.exports = {
       full: '99999px',
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar')({ nocompatible: true })],
 }

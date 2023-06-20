@@ -14,7 +14,14 @@ async function handler(req: NextRequest) {
       id: idBook,
     },
     include: {
-      ratings: true,
+      ratings: {
+        orderBy: {
+          created_at: 'desc',
+        },
+        include: {
+          user: true,
+        },
+      },
       categories: {
         select: {
           category: true,
