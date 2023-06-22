@@ -1,15 +1,16 @@
 import { api } from '@/lib/api'
 import { BoxRating } from '../BoxRating'
+import { IBook } from '@/app/explore/page'
 
-interface Book {
-  id: string
-  name: string
-  author: string
-  summary: string
-  total_pages: number
-  created_at: string
-  cover_url: string
-}
+// interface Book {
+//   id: string
+//   name: string
+//   author: string
+//   summary: string
+//   total_pages: number
+//   created_at: string
+//   cover_url: string
+// }
 
 interface User {
   id: string
@@ -21,7 +22,7 @@ interface User {
 export interface Rating {
   id: string
   user: User
-  book: Book
+  book: IBook
   description: string
   rate: number
   created_at: string

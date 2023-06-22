@@ -85,7 +85,7 @@ export default function ExploreBooks() {
   return (
     <SessionCtxProvider>
       <section className="flex w-full flex-1 justify-between">
-        <main className="flex w-full flex-col gap-10 py-6 pl-24">
+        <main className="flex w-full flex-col gap-10 py-6">
           <TitlePage />
 
           <section className="flex w-full flex-col gap-16">

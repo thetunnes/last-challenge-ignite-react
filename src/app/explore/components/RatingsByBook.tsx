@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { FormNewRate } from '@/components/FormNewRate'
 import { useSessionCtx } from '@/app/hooks/useSession'
+import { ProfileAvatar } from '@/components/ProfileAvatar'
 
 interface Rating extends IRating {
   user: {
@@ -83,14 +84,7 @@ export function RatingsByBook({
           >
             <header className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <Image
-                  src={rating.user.avatar_url}
-                  width={40}
-                  height={40}
-                  alt=""
-                  quality={100}
-                  className="h-10 w-10 rounded-full border border-gradient-vertical object-cover"
-                />
+                <ProfileAvatar sourceImg={rating.user.avatar_url} size="md" />
                 <div className="flex flex-col items-start">
                   <strong className="font-bold leading-short">
                     {rating.user.name}
