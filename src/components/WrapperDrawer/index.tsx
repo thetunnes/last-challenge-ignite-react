@@ -1,7 +1,7 @@
 import { ContentDrawer } from '@/app/explore/components/ContentDrawer'
 import { X } from 'lucide-react'
-import { signIn, useSession } from 'next-auth/react'
-import { useRef } from 'react'
+import { signIn } from 'next-auth/react'
+import { useRef, useState } from 'react'
 import { Button } from '../Button'
 import GoogleIcon from '../IconsLogin/Google'
 import GithubIcon from '../IconsLogin/Github'
@@ -12,7 +12,7 @@ interface IWrapperDrawer {
 }
 
 export function WrapperDrawer({ bookId, onClose }: IWrapperDrawer) {
-  const { data: session, status } = useSession()
+  const [unauthorized, setUnauthorized] = useState(false)
 
   const overlayRef = useRef<HTMLDivElement>(null)
 
@@ -29,6 +29,11 @@ export function WrapperDrawer({ bookId, onClose }: IWrapperDrawer) {
     } catch (err) {
       console.log(err)
     }
+  }
+
+  function closeModal() {
+    onClose()
+    setUnauthorized(false)
   }
 
   if (!bookId.length) {
@@ -51,15 +56,19 @@ export function WrapperDrawer({ bookId, onClose }: IWrapperDrawer) {
           onClick={() => onClose()}
         />
 
-        <ContentDrawer bookId={bookId} closeDrawer={onClose} />
+        <ContentDrawer
+          bookId={bookId}
+          closeDrawer={closeModal}
+          openModalBlock={() => setUnauthorized(true)}
+        />
       </div>
 
-      {status !== 'loading' && !session ? (
+      {unauthorized ? (
         <div className="absolute bottom-0 left-0 right-0 top-0 z-[999] bg-black/60">
           <section className="absolute left-1/2 top-1/2 z-[9999] flex h-80 w-full max-w-max -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[12px] bg-gray-700 px-16 py-4">
             <X
               className="absolute right-4 top-4 cursor-pointer text-2xl text-gray-400 transition-colors hover:text-gray-100"
-              onClick={() => onClose()}
+              onClick={() => closeModal()}
             />
             <div className="flex w-full flex-col justify-center gap-4">
               <h1 className="mx-auto font-bold text-gray-200">

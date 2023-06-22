@@ -4,6 +4,7 @@ import './globals.css'
 import { Nunito } from 'next/font/google'
 import { Session } from 'next-auth'
 import { SessionProvider } from 'next-auth/react'
+import { BaseLayout } from './baseLayout'
 
 const nunito = Nunito({ subsets: ['latin'] })
 
@@ -24,9 +25,7 @@ export default function RootLayout({ children, session }: LayoutProps) {
         className={`${nunito.className} box-border min-h-screen max-w-[calc(100vw-1.25rem)] bg-gray-800 p-5 text-gray-200`}
       >
         <SessionProvider session={session}>
-          <div className="flex min-h-[calc(100vh-2.5rem)] w-full">
-            {children}
-          </div>
+          <BaseLayout>{children}</BaseLayout>
         </SessionProvider>
       </body>
     </html>

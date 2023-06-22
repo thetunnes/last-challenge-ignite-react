@@ -7,6 +7,7 @@ import { AverageRating } from '@/components/AverageRating'
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { FormNewRate } from '@/components/FormNewRate'
+import { useSessionCtx } from '@/app/hooks/useSession'
 
 interface Rating extends IRating {
   user: {
@@ -20,6 +21,7 @@ interface RatingsBookProps {
   ratings: Rating[] | undefined
   bookId: string
   closeDrawer: () => void
+  openModalBlock: () => void
 }
 
 dayjs.locale(ptBR)
@@ -29,10 +31,21 @@ export function RatingsByBook({
   ratings,
   bookId,
   closeDrawer,
+  openModalBlock,
 }: RatingsBookProps) {
   const [toRate, setToRate] = useState(false)
 
   const { data: session } = useSession()
+
+  const { verifySession } = useSessionCtx()
+
+  async function handleClickAvailable() {
+    const session = await verifySession()
+    setToRate(true)
+    if (!session) {
+      return openModalBlock()
+    }
+  }
 
   return (
     <div className="flex flex-col justify-center gap-3">
@@ -42,7 +55,7 @@ export function RatingsByBook({
           !toRate && (
             <button
               className="font-bold text-purple-100"
-              onClick={() => setToRate(true)}
+              onClick={() => handleClickAvailable()}
             >
               Avaliar
             </button>

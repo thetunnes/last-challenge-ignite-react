@@ -1,9 +1,9 @@
-import Image from 'next/image'
 import { Rating } from '../RecentRated'
 import dayjs from 'dayjs'
 import RelativeTime from 'dayjs/plugin/relativeTime'
 import { Book } from '../Book'
 import { AverageRating } from '../AverageRating'
+import { ProfileAvatar } from '../ProfileAvatar'
 
 interface BoxProps {
   rating: Rating
@@ -17,15 +17,7 @@ export function BoxRating({ rating }: BoxProps) {
     <div className="flex w-full flex-col gap-8 rounded-[8px] bg-gray-700">
       <header className="flex items-center justify-between p-6">
         <div className="flex items-center gap-4">
-          <div className="w-max rounded-full bg-gradient-vertical p-0.5">
-            <Image
-              src={rating.user.avatar_url}
-              alt=""
-              width={40}
-              height={40}
-              className="h-10 w-10 rounded-full"
-            />
-          </div>
+          <ProfileAvatar sourceImg={rating.user.avatar_url} />
 
           <div>
             <h4>{rating.user.name}</h4>

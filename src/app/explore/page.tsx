@@ -1,6 +1,5 @@
 'use client'
 import { use, useEffect, useState } from 'react'
-import { Sidebar } from '@/components/MenuSidebar'
 import { TitlePage } from '@/components/TitlePage'
 import { api } from '@/lib/api'
 import { BtnCategory } from '@/components/BtnCategory'
@@ -8,6 +7,7 @@ import { Book } from '@/components/Book'
 import { Loading } from '@/components/Loading'
 import { AverageRating } from '@/components/AverageRating'
 import { WrapperDrawer } from '@/components/WrapperDrawer'
+import { SessionCtxProvider } from '../hooks/useSession'
 
 export interface ICategory {
   id: string
@@ -83,62 +83,64 @@ export default function ExploreBooks() {
   }, [chooseCategories])
 
   return (
-    <section className="flex w-full flex-1 justify-between">
-      <Sidebar />
+    <SessionCtxProvider>
+      <section className="flex w-full flex-1 justify-between">
+        <main className="flex w-full flex-col gap-10 py-6 pl-24">
+          <TitlePage />
 
-      <main className="flex w-full flex-col gap-10 py-6 pl-24">
-        <TitlePage />
-
-        <section className="flex w-full flex-col gap-16">
-          <nav className="flex w-full flex-wrap items-center gap-7">
-            <BtnCategory
-              category={{
-                id: 'all',
-                name: 'Tudo',
-              }}
-              onChooseCategories={setChooseCategories}
-              active={!chooseCategories.length}
-            />
-
-            {categories.map((category) => (
+          <section className="flex w-full flex-col gap-16">
+            <nav className="flex w-full flex-wrap items-center gap-7">
               <BtnCategory
+                category={{
+                  id: 'all',
+                  name: 'Tudo',
+                }}
                 onChooseCategories={setChooseCategories}
-                category={category}
-                key={category.id}
-                active={chooseCategories.some((cat) => cat.id === category.id)}
+                active={!chooseCategories.length}
               />
-            ))}
-          </nav>
 
-          {isLoadingBooks ? (
-            <div className="flex w-full justify-center">
-              <Loading>
-                <span className="text-xs">Carregando livros...</span>
-              </Loading>
-            </div>
-          ) : books.length ? (
-            <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-2 xl:grid-cols-3">
-              {books.map((book) => (
-                <Book
-                  book={book}
-                  key={book.id}
-                  onClick={() => setOpenDrawerBook(book.id)}
-                >
-                  <AverageRating ratings={book.ratings} />
-                </Book>
+              {categories.map((category) => (
+                <BtnCategory
+                  onChooseCategories={setChooseCategories}
+                  category={category}
+                  key={category.id}
+                  active={chooseCategories.some(
+                    (cat) => cat.id === category.id,
+                  )}
+                />
               ))}
-            </div>
-          ) : (
-            <div className="flex w-full justify-center">
-              <p>Não encontramos livros para os filtros inseridos 😔</p>
-            </div>
-          )}
-        </section>
-      </main>
-      <WrapperDrawer
-        bookId={openDrawerBook}
-        onClose={() => setOpenDrawerBook('')}
-      />
-    </section>
+            </nav>
+
+            {isLoadingBooks ? (
+              <div className="flex w-full justify-center">
+                <Loading>
+                  <span className="text-xs">Carregando livros...</span>
+                </Loading>
+              </div>
+            ) : books.length ? (
+              <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-2 xl:grid-cols-3">
+                {books.map((book) => (
+                  <Book
+                    book={book}
+                    key={book.id}
+                    onClick={() => setOpenDrawerBook(book.id)}
+                  >
+                    <AverageRating ratings={book.ratings} />
+                  </Book>
+                ))}
+              </div>
+            ) : (
+              <div className="flex w-full justify-center">
+                <p>Não encontramos livros para os filtros inseridos 😔</p>
+              </div>
+            )}
+          </section>
+        </main>
+        <WrapperDrawer
+          bookId={openDrawerBook}
+          onClose={() => setOpenDrawerBook('')}
+        />
+      </section>
+    </SessionCtxProvider>
   )
 }

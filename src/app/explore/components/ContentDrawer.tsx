@@ -34,9 +34,14 @@ export interface IBook {
 interface DataBookProps {
   bookId: string
   closeDrawer: () => void
+  openModalBlock: () => void
 }
 
-export function ContentDrawer({ bookId, closeDrawer }: DataBookProps) {
+export function ContentDrawer({
+  bookId,
+  closeDrawer,
+  openModalBlock,
+}: DataBookProps) {
   const [book, setBook] = useState<IBook>()
 
   async function getBook() {
@@ -68,6 +73,7 @@ export function ContentDrawer({ bookId, closeDrawer }: DataBookProps) {
         ratings={book?.ratings}
         bookId={book.id}
         closeDrawer={closeDrawer}
+        openModalBlock={openModalBlock}
       />
     </div>
   )

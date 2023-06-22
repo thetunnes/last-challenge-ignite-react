@@ -17,8 +17,8 @@ interface Props {
 }
 
 const schemaNewRate = z.object({
-  description: z.string().min(4, 'Descrição deve ser preenchido'),
-  rate: z.number().min(0.5, 'Uma pontuação deve ser selecionada'),
+  description: z.string().min(4, 'Uma descrição deve ser escrita'),
+  rate: z.number().min(0.5, 'Uma nota de avaliação deve ser selecionada'),
 })
 
 type NewRateData = z.infer<typeof schemaNewRate>
@@ -29,11 +29,15 @@ export function FormNewRate({
   closeDrawer,
   bookId,
 }: Props) {
-  const { register, handleSubmit, watch, setValue, formState } =
+  const { register, handleSubmit, watch, setValue, formState, reset } =
     useForm<NewRateData>({
       resolver: zodResolver(schemaNewRate),
+      defaultValues: {
+        description: '',
+        rate: 0,
+      },
     })
-  const { isSubmitting } = formState
+  const { errors, isSubmitting } = formState
 
   async function onSubmit(data: NewRateData) {
     const dataSend = {
@@ -46,6 +50,7 @@ export function FormNewRate({
     try {
       await api.post('/rating', dataSend)
 
+      reset()
       closeDrawer()
     } catch (err) {
       console.log(err)
@@ -84,17 +89,24 @@ export function FormNewRate({
         lengthValue={watch('description')?.length ?? 0}
         placeholder="Escreva sua avaliação"
       />
-      <div className="flex items-center justify-end gap-2">
-        <Button size="sm" onClick={() => closeForm()}>
-          <X className="text-2xl text-purple-100" />
-        </Button>
-        <Button
-          size="sm"
-          disabled={!watch('description')?.length || isSubmitting}
-          type="submit"
-        >
-          <Check className={`text-2xl text-green-100`} />
-        </Button>
+      <div className="flex flex-wrap items-center justify-between gap-1">
+        {!!Object.values(errors).length && (
+          <p className="text-xs font-bold text-red-500">
+            {Object.values(errors)[0].message}
+          </p>
+        )}
+        <div className="flex flex-1 items-center justify-end gap-2">
+          <Button size="sm" onClick={() => closeForm()}>
+            <X className="text-2xl text-purple-100" />
+          </Button>
+          <Button
+            size="sm"
+            disabled={!watch('description')?.length || isSubmitting}
+            type="submit"
+          >
+            <Check className={`text-2xl text-green-100`} />
+          </Button>
+        </div>
       </div>
     </form>
   )
