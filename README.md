@@ -11,7 +11,7 @@ Utilizamos API Routes do NextJS com Prisma ORM e SQLite.
 Desenvolvemos toda a aplicação componentizando o que fosse necessário, utilizando TailwindCSS para estilização e TypeScript para uma melhor utilização das váriaveis e funções.
 
 
-* Next tasks
+### Next tasks
 
 [] Responsive Web Design in all application
 [] Developement Responsive Design in Menu Sidebar

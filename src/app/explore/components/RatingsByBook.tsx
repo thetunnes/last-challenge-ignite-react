@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import dayjs from 'dayjs'
 import RelativeTime from 'dayjs/plugin/relativeTime'
 import ptBR from 'dayjs/locale/pt-br'
