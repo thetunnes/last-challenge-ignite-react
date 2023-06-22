@@ -13,7 +13,7 @@ Desenvolvemos toda a aplicação componentizando o que fosse necessário, utiliz
 
 * Next tasks
 
-[] Responsive Web Design in all application
-[] Developement Responsive Design in Menu Sidebar
-[] Create Component and Request Last Reviewed with User Logged
-[] Input Search for pages Perfil and Explore, where Server Components not working with Inputs.
+- [ ] Responsive Web Design in all application <br />
+- [ ] Developement Responsive Design in Menu Sidebar <br />
+- [ ] Create Component and Request Last Reviewed with User Logged <br />
+- [ ] Input Search for pages Perfil and Explore, where Server Components not working with Inputs. <br />
